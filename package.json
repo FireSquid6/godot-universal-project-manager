@@ -113,6 +113,7 @@
     "electron-log": "^4.4.8",
     "electron-updater": "^5.2.3",
     "react": "^18.2.0",
+    "react-bootstrap-icons": "^1.10.2",
     "react-dom": "^18.2.0",
     "react-router-dom": "^6.4.0"
   },
@@ -172,6 +173,7 @@
     "sass": "^1.54.4",
     "sass-loader": "^13.0.2",
     "style-loader": "^3.3.1",
+    "tailwindcss": "^3.2.4",
     "terser-webpack-plugin": "^5.3.5",
     "ts-jest": "^28.0.8",
     "ts-loader": "^9.3.1",

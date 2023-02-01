@@ -3,12 +3,10 @@ type Props = {
   title: string;
 };
 
-export default function Header({ url, title }: Props) {
+export default function HeaderTab({ url, title }: Props) {
   return (
-    <div className="header-tab">
-      <h2>
-        <a href={url}>{title}</a>
-      </h2>
-    </div>
+    <a href={url} className="header-tab">
+      <h2>{title}</h2>
+    </a>
   );
 }

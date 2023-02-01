@@ -1,6 +1,93 @@
 @import url('https://fonts.googleapis.com/css2?family=Quicksand&display=swap');
 
+@font-face {
+  font-family: "Light";
+  /*Can be any text*/
+  src: local("DroidSans"),
+    url("./fonts/DroidSans.ttf") format("truetype");
+}
+
+
 
 body {
   font-family: 'Quicksand', sans-serif;
+  background-color: #0C0910;
+  color: #FFF8F0;
+}
+
+
+header {
+  margin: 0;
+  padding: 0;
+  width: 100%;
+  position: absolute;
+  top: 0;
+  left: 0;
+
+  background-color: #3E3944;
+
+  border-bottom: 2px solid #63B995;
+}
+
+header h3 {
+  margin: 5px;
+}
+
+.header-top {
+  margin-right: 5px;
+  margin-left: 5px;
+  display: flex;
+  flex-direction: row;
+  align-items: center;
+
+  justify-content: space-between;
+}
+
+.header-top a {
+  color: #AD5D4E;
+  transition: all 0.2s ease-out;
+}
+
+.header-top a:hover {
+  color: #FFF8F0;
+}
+
+.header-tabs {
+  display: flex;
+  flex-direction: row;
+  justify-content: left;
+  align-items: center;
+
+  margin: 0px;
+  padding: 0px;
+}
+
+.header-tab {
+  transition: all 0.2s ease-out;
+
+  padding-left: 10px;
+  padding-right: 10px;
+
+  min-width: 120px;
+
+  margin-top: 5px;
+
+  color: #AD5D4E;
+  text-align: center;
+  text-decoration: none;
+
+  margin-left: 0.5px;
+  margin-right: 0.5px;
+
+  background-color: #272932;
+
+  border: 2px solid #63B995;
+  border-bottom-style: none;
+  border-radius: 20px 20px 0px 0px;
+}
+
+.header-tab:hover {
+  color: #FFF8F0;
+  padding-top: 5px;
+  margin-top: 0px;
 }
