@@ -13,16 +13,19 @@ body {
   font-family: 'Quicksand', sans-serif;
   background-color: #0C0910;
   color: #FFF8F0;
+
+  margin: 0;
+  padding: 0;
+
 }
 
 
 header {
+  display: flex;
+
   margin: 0;
   padding: 0;
   width: 100%;
-  position: absolute;
-  top: 0;
-  left: 0;
 
   background-color: #3E3944;
 
@@ -43,14 +46,6 @@ header h3 {
   justify-content: space-between;
 }
 
-.header-top a {
-  color: #AD5D4E;
-  transition: all 0.2s ease-out;
-}
-
-.header-top a:hover {
-  color: #FFF8F0;
-}
 
 .header-tabs {
   display: flex;
@@ -65,8 +60,8 @@ header h3 {
 .header-tab {
   transition: all 0.2s ease-out;
 
-  padding-left: 10px;
-  padding-right: 10px;
+  padding-left: 5px;
+  padding-right: 5px;
 
   min-width: 120px;
 
@@ -84,6 +79,13 @@ header h3 {
   border: 2px solid #63B995;
   border-bottom-style: none;
   border-radius: 20px 20px 0px 0px;
+}
+
+.header-tab h4 {
+  padding: 0px;
+  margin: 0px;
+  padding-top: 5px;
+  padding-bottom: 5px;
 }
 
 .header-tab:hover {

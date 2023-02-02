@@ -1,3 +1,5 @@
+import { Link } from 'react-router-dom';
+
 type Props = {
   url: string;
   title: string;
@@ -5,8 +7,8 @@ type Props = {
 
 export default function HeaderTab({ url, title }: Props) {
   return (
-    <a href={url} className="header-tab">
-      <h2>{title}</h2>
-    </a>
+    <Link to={url} className="header-tab">
+      <h4>{title}</h4>
+    </Link>
   );
 }
