@@ -1,16 +1,19 @@
-import HeaderTab from './HeaderTab';
 import { useState } from 'react';
+import { useLocation } from 'react-router-dom';
 import { Git, Github } from 'react-bootstrap-icons';
 
+import HeaderTab from './HeaderTab';
+
 export default function Header() {
-  const [route, setRoute] = useState('/');
+  const location = useLocation().pathname;
+  console.log(location);
 
   return (
     <header>
       <div className="header-tabs">
-        <HeaderTab title="Projects" url="/" />
-        <HeaderTab title="Versions" url="/versions" />
-        <HeaderTab title="Config" url="/config" />
+        <HeaderTab route={location} title="Projects" url="/" />
+        <HeaderTab route={location} title="Versions" url="/versions" />
+        <HeaderTab route={location} title="Config" url="/config" />
       </div>
     </header>
   );

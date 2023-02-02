@@ -81,6 +81,13 @@ header h3 {
   border-radius: 20px 20px 0px 0px;
 }
 
+.header-tab.active {
+  padding-top: 5px;
+  margin-top: 0px;
+  color: #FFF8F0;
+  background-color: #13151b;
+}
+
 .header-tab h4 {
   padding: 0px;
   margin: 0px;
