@@ -1,76 +1,39 @@
-# electron-vite-react
+# Godot Universal Project Manager
+A cross-version and cross-platform version for the Godot Game engine. Built in electron with react. 
 
-[![awesome-vite](https://awesome.re/mentioned-badge.svg)](https://github.com/vitejs/awesome-vite)
-![GitHub stars](https://img.shields.io/github/stars/caoxiemeihao/vite-react-electron?color=fa6470)
-![GitHub issues](https://img.shields.io/github/issues/caoxiemeihao/vite-react-electron?color=d8b22d)
-![GitHub license](https://img.shields.io/github/license/caoxiemeihao/vite-react-electron)
-[![Required Node.JS >= 14.18.0 || >=16.0.0](https://img.shields.io/static/v1?label=node&message=14.18.0%20||%20%3E=16.0.0&logo=node.js&color=3f893e)](https://nodejs.org/about/releases)
+**THIS IS NOT A COMPLETED PROJECT**
 
-English | [简体中文](README.zh-CN.md)
+## 💖 Features
+- [ ] 📂 Manage all of your godot projects from one place
+- [ ] 📦 No annoying setup. Just download and run.
+- [ ] 💽 Download and save all versions, including the latest betas.
+- [ ] 🖌️ Easily create new projects
+- [ ] 🐙 Github integration
+- [ ] ⬆️ Update projects when new versions are released
+- [ ] 🎨 Customizeable theme
 
-## 👀 Overview
 
-📦 Ready out of the box  
-🎯 Based on the official [template-react-ts](https://github.com/vitejs/vite/tree/main/packages/create-vite/template-react-ts), project structure will be familiar to you  
-🌱 Easily extendable and customizable  
-💪 Supports Node.js API in the renderer process  
-🔩 Supports C/C++ native addons  
-🐞 Debugger configuration included  
-🖥 Easy to implement multiple windows  
+## 🖥️ Install
+Just download the binary corresponding to your version from the releases page.
 
-## 🛫 Quick start
+## 🏃‍♂️ Quick Start
+1. Go to config and setup the projects and versions folder. These should both be empty (yes, even if you already have a )
+2. (Optional, but recommended) add the versions folder to your path [(wait, what's a path?)](https://en.wikipedia.org/wiki/PATH_(variable))
+3. Import or create a new project. It's always recommended to import from github, but if neccessary you may import from local files.
 
-```sh
-npm create electron-vite
-```
 
-![electron-vite-react.gif](/public/electron-vite-react.gif)
+## 📕 Info and FAQ
+### Versions
+All versions executables are saved in the following format:  
+`godot_vX.X.X-{release}`  
 
-## 🐞 Debug
+If you added the versions folder to your system's path, you will be able to call godot executables using this 
 
-![electron-vite-react-debug.gif](/public/electron-vite-react-debug.gif)
+### What is this `gump.json` file in my godot projects?
+The `gupm.json` file informs this program what version to open the project in. It is created either when the project is imported for the first time or created. It's recommended that you do **NOT** `.gitignore` this file. 
 
-## 📂 Directory structure
+### How do I change a project's version?
+The easiest way is to click the arrow icon on the project and upgrade it to whatever version you want. You can also simply close it and gupm, change the `gupm.json`'s `version` property to whatever you desire, and reopen the project. This method can be used to downgrade a project, but that's not recommended.
 
-Familiar React application structure, just with `electron` folder on the top :wink:  
-*Files in this folder will be separated from your React application and built into `dist-electron`*  
-
-```tree
-├── electron                                 Electron-related code
-│   ├── main                                 Main-process source code
-│   └── preload                              Preload-scripts source code
-│
-├── release                                  Generated after production build, contains executables
-│   └── {version}
-│       ├── {os}-{os_arch}                   Contains unpacked application executable
-│       └── {app_name}_{version}.{ext}       Installer for the application
-│
-├── public                                   Static assets
-└── src                                      Renderer source code, your React application
-```
-
-## 🚨 Be aware
-
-This template integrates Node.js API to the renderer process by default. If you want to follow **Electron Security Concerns** you might want to disable this feature. You will have to expose needed API by yourself.  
-
-To get started, remove the option as shown below. This will [modify the Vite configuration and disable this feature](https://github.com/electron-vite/vite-plugin-electron-renderer#config-presets-opinionated).
-
-```diff
-# vite.config.ts
-
-export default {
-  plugins: [
-    ...
--   // Use Node.js API in the Renderer-process
--   renderer({
--     nodeIntegration: true,
--   }),
-    ...
-  ],
-}
-```
-
-## ❔ FAQ
-
-- [dependencies vs devDependencies](https://github.com/electron-vite/vite-plugin-electron-renderer#dependencies-vs-devdependencies)
-- [C/C++ addons, Node.js modules - Pre-Bundling](https://github.com/electron-vite/vite-plugin-electron-renderer#dependency-pre-bundling)
+### Why did you build this in electron?
+While building it in Godot itself probably would have been the most comforable for me, it would limit doing cool things with the UI. I also needed to learn React and Electron anyways, so I thought this would be a good project to force me to. 
