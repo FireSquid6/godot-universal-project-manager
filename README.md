@@ -42,4 +42,5 @@ While building it in Godot itself probably would have been the most comforable f
 You will need to have node js installed. If you have no idea what you're doing or get stuck, dm FireSquid#8882 on discord. You can simply:
 1. Clone the project using your preferred method of choice
 2. Open it in your preferred IDE
-3. Push your changes to a new pull request
+3. Run `npm dev` (alternatively you can probably use pnpm or yarn if you'd like)
+4. Push your changes to a new pull request
