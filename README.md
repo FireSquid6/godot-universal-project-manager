@@ -37,3 +37,9 @@ The easiest way is to click the arrow icon on the project and upgrade it to what
 
 ### Why did you build this in electron?
 While building it in Godot itself probably would have been the most comforable for me, it would limit doing cool things with the UI. I also needed to learn React and Electron anyways, so I thought this would be a good project to force me to. 
+
+## 🔨 Contributor Guide
+You will need to have node js installed. If you have no idea what you're doing or get stuck, dm FireSquid#8882 on discord. You can simply:
+1. Clone the project using your preferred method of choice
+2. Open it in your preferred IDE
+3. Push your changes to a new pull request
