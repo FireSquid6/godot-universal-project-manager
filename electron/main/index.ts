@@ -2,7 +2,7 @@ import { app, BrowserWindow, shell, ipcMain } from 'electron'
 import { release } from 'node:os'
 import { join } from 'node:path'
 import { download } from 'electron-dl'
-import * as settings from 'electron-app-settings';
+const Store = require('electron-store');
 
 
 // The built directory structure
@@ -42,6 +42,7 @@ let win: BrowserWindow | null = null
 const preload = join(__dirname, '../preload/index.js')
 const url = process.env.VITE_DEV_SERVER_URL
 const indexHtml = join(process.env.DIST, 'index.html')
+const store = new Store();
 
 async function createWindow() {
   win = new BrowserWindow({
@@ -90,12 +91,15 @@ async function createWindow() {
     key: string,
     value: any,
   }
+
   ipcMain.handle('store-setting', async (event, data) => {
-    settings.set(data.key, data.value);
-    return Promise.resolve()
+    console.log(data)
+    console.log(`${data.key} ${data.value}`)
+    store.set(data.key, data.value)
   });
+
   ipcMain.handle('get-setting', async (event, key) => {
-    return settings.get(key);
+    console.log(store.get(key));
   });
 }
 
