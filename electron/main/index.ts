@@ -87,6 +87,7 @@ async function createWindow() {
       .then(dl => event.reply('download complete', dl.getSavePath()));
   });
 
+  // handle storing and getting settings
   let data: {
     key: string,
     value: any,
@@ -102,6 +103,12 @@ async function createWindow() {
     console.log(store.get(key));
   });
 }
+
+// handle requests to crawl the tuxfamily website
+ipcMain.handle('crawl-tuxfamily', async (event, url) => {
+  // TODO
+});
+
 
 app.whenReady().then(createWindow)
 
