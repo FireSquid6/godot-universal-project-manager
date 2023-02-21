@@ -72,6 +72,7 @@ export default function parseUrl(url: string): Object | null {
     osx: ["osx"],
     linux64: ["x86_64", "x11.64"],
     linux32: ["x86_32", "x11.32"],
+    android: ["apk"],
   };
 
   let key: string;
