@@ -14,6 +14,10 @@ export default function Header() {
 
 
   ipcRenderer.on('set-statusbar-name', (event, name: string) => {
+    // when this is called from the main process, it leaks memory
+    // not sure why this happens.
+    // github copilot seems to think that it's because the event is not being cleaned up properly or something
+
     if (name === "") {
       setStatusText(noStatusText);
       setStatusIsRunning(false);
