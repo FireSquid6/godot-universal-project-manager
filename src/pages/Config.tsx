@@ -1,4 +1,5 @@
 import { ipcRenderer } from "electron";
+import React from "react";
 
 
 
@@ -28,8 +29,6 @@ export default function Config() {
       </form>
 
       <button onClick={onClick}>Print settings to the console!</button>
-      
-      
     </>
   );
 }
