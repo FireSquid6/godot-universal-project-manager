@@ -3,6 +3,7 @@ import { release } from "node:os";
 import { join } from "node:path";
 import { download } from "electron-dl";
 
+import * as fs from "fs";
 import crawl from "./crawling/crawler";
 import parseUrl from "./crawling/parser";
 
@@ -132,6 +133,10 @@ ipcMain.on("crawl-tuxfamily", async (event, args) => {
     date: new Date().toUTCString(),
     links: found_links,
   });
+
+  // TODO: save the json file
+
+  win.webContents.send("set-statusbar-name", "");
 
   return Promise.resolve();
 });
