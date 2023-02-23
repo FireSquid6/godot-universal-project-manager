@@ -4,14 +4,14 @@ import { ipcRenderer } from 'electron';
 
 export default function Versions() {
   const handleClick = () => {
-    ipcRenderer.invoke('crawl-tuxfamily', 'The status');
+    ipcRenderer.send('crawl-tuxfamily');
   };
 
   return (
     <>
       <h1>Versions</h1>
       <button type="button" onClick={handleClick}>
-        Click me!
+        Crawl Tuxfamily Repository for new versions
       </button>
     </>
   );
