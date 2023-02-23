@@ -1,8 +1,12 @@
-import { useState } from 'react';
+import { useState, useEffect } from 'react';
 import { useLocation } from 'react-router-dom';
 import { ipcRenderer } from 'electron';
 import "./header.scss";
 import HeaderTab from './HeaderTab';
+
+import { FontAwesomeIcon } from '@fortawesome/react-fontawesome'
+import { faAtom } from '@fortawesome/free-solid-svg-icons'
+
 
 export default function Header() {
   const noStatusText = "No background process";
@@ -10,8 +14,6 @@ export default function Header() {
   const location = useLocation().pathname;
   const [statusText, setStatusText] = useState(noStatusText);
   const [satusIsRunning, setStatusIsRunning] = useState(false);
-
-
 
   ipcRenderer.on('set-statusbar-name', (event, name: string) => {
     // when this is called from the main process, it leaks memory
@@ -38,8 +40,8 @@ export default function Header() {
         </div>
       </header>
       <div className="status-bar">
-          <p>
-            <span id="statusLogo" className="status-bar-icon">Logo</span> 
+          <p onClick={() => setStatusIsRunning(false)}>
+            <FontAwesomeIcon icon={faAtom} spin={satusIsRunning}/>
             <span>{statusText}</span>
           </p>
       </div>
