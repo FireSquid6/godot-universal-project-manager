@@ -1,9 +1,10 @@
 import * as download from 'electron-dl';
+import { ipcRenderer } from 'electron';
 
 
 export default function Versions() {
   const handleClick = () => {
-    
+    ipcRenderer.invoke('crawl-tuxfamily', 'The status');
   };
 
   return (
