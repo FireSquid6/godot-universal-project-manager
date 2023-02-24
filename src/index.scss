@@ -1,5 +1,16 @@
-@import url('https://fonts.googleapis.com/css2?family=Quicksand&display=swap');
+$background-main: #242829;
+$background-tint: #2d3233;
+$background-shade: #1d2021;
 
+$text-dark: #252525;
+$text-light: #e0e0e0;
+
+$accent-main: #63B995;
+$accent-background: #13151b;
+$accent-hover: #92ceb5;
+
+
+@import url('https://fonts.googleapis.com/css2?family=Quicksand&display=swap');
 @font-face {
   font-family: "Light";
   /*Can be any text*/
@@ -8,13 +19,19 @@
 }
 
 
-
 body {
   font-family: 'Quicksand', sans-serif;
-  background-color: #0C0910;
+  background-color: $background-shade;
   color: #FFF8F0;
 
   margin: 0;
   padding: 0;
 
 }
+
+
+@import "./App.scss";
+@import "./components/ProjectBox.scss";
+@import "./header/header.scss";
+
+

@@ -2,8 +2,12 @@
   display: flex;
   flex-direction: row;
   justify-content: flex-start;
+  padding: 10px;
+  margin: 10px;
   align-items: center;
-  background-color: rgb(10, 15, 20);
+  background-color: $accent-background;
+
+  height: 140px;
 }
 
 .project-box-info {
@@ -13,25 +17,25 @@
 }
 
 .project-box-actions {
-
+  margin: 10px;
 }
 
 .project-box-actions button {
   width: 100%;
   font-family: 'Segoe UI', Arial, monospace;
-  background-color:rgb(100, 75, 100);
+  background-color: $accent-main;
   color: white;
   transition: all 0.2s ease-in-out;
 }
 
 
 .project-box-actions button:hover {
-  background-color:rgb(110, 85, 110);
+  background-color: $accent-hover;
   color: white;
   transform: translateX(-10px);
 }
 
 .project-box-actions button:active {
-  background-color:rgb(120, 95, 120);
+  background-color: $accent-main;
   color: white;
 }
