@@ -3,6 +3,7 @@ import cheerio from "cheerio";
 import * as fs from "fs";
 
 export default async function crawl(
+  shallow: boolean,
   url = "https://downloads.tuxfamily.org/godotengine/",
   exclude = ["media", "patreon", "testing", "toolchains", "../"]
 ) {
@@ -57,10 +58,11 @@ export default async function crawl(
         }
       }
     });
+
+    if (shallow && visited.length > 5) {
+      return downloads;
+    }
   }
 
-  fs.writeFileSync("downloads.json", JSON.stringify(downloads));
   return downloads;
 }
-
-let downloads = crawl();

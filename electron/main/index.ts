@@ -2,6 +2,11 @@ import { app, BrowserWindow, shell, ipcMain } from "electron";
 import { release } from "node:os";
 import { join } from "node:path";
 import { download } from "electron-dl";
+
+import * as fs from "fs";
+import crawl from "./crawling/crawler";
+import parseUrl from "./crawling/parser";
+
 const Store = require("electron-store");
 
 // The built directory structure
@@ -69,8 +74,6 @@ async function createWindow() {
     win.loadFile(indexHtml);
   }
 
-  console.log("I just sent an awesome statusbar name");
-
   // Test actively push message to the Electron-Renderer
   win.webContents.on("did-finish-load", () => {
     win?.webContents.send("main-process-message", new Date().toLocaleString());
@@ -101,14 +104,43 @@ async function createWindow() {
   });
 
   ipcMain.handle("get-setting", async (event, key) => {
-    console.log(store.get(key));
+    if (store.has(key)) {
+      return store.get(key);
+    }
+    return null;
   });
 }
 
 // handle requests to crawl the tuxfamily website
-ipcMain.handle("crawl-tuxfamily", async (event, url) => {
-  // TODO
-  win.webContents.send("set-statusbar-name", "Awesome statusbar name!");
+ipcMain.on("crawl-tuxfamily", async (event, args) => {
+  win.webContents.send("set-statusbar-name", "Finding download links...");
+  const possible_links = await crawl(true);
+
+  let found_links = [];
+  await possible_links.forEach(async (url, i) => {
+    win.webContents.send(
+      "set-statusbar-name",
+      `Parsing link ${i + 1} of ${possible_links.length}...`
+    );
+    let link_data: Object | null = await parseUrl(url);
+
+    if (link_data !== null) {
+      found_links.push(link_data);
+    }
+  });
+
+  console.log(found_links);
+  win.webContents.send("set-statusbar-name", "Saving links as json file...");
+  const setting = {
+    date: new Date().toUTCString(),
+    links: found_links,
+  };
+
+  store.set("crawl-results", setting);
+
+  win.webContents.send("set-statusbar-name", "");
+
+  return Promise.resolve();
 });
 
 app.whenReady().then(createWindow);
