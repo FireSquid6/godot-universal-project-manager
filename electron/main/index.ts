@@ -97,8 +97,6 @@ async function createWindow() {
   };
 
   ipcMain.handle("store-setting", async (event, data) => {
-    console.log(data);
-    console.log(`${data.key} ${data.value}`);
     store.set(data.key, data.value);
   });
 
