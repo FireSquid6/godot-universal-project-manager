@@ -5,9 +5,9 @@ header {
     padding: 0;
     width: 100%;
 
-    background-color: #3E3944;
+    background-color: $background-main;
 
-    border-bottom: 2px solid #63B995;
+    border-bottom: 2px solid $accent-main;
 }
 
 header h3 {
@@ -52,9 +52,9 @@ header h3 {
     margin-left: 0.5px;
     margin-right: 0.5px;
 
-    background-color: #272932;
+    background-color: $background-tint;
 
-    border: 2px solid #63B995;
+    border: 2px solid $accent-main;
     border-bottom-style: none;
     border-radius: 20px 20px 0px 0px;
 }
@@ -62,8 +62,8 @@ header h3 {
 .header-tab.active {
     padding-top: 5px;
     margin-top: 0px;
-    color: #FFF8F0;
-    background-color: #13151b;
+    color: $text-light;
+    background-color: $background-shade;
 }
 
 .header-tab h4 {
@@ -74,7 +74,7 @@ header h3 {
 }
 
 .header-tab:hover {
-    color: #FFF8F0;
+    color: $text-light;
     padding-top: 5px;
     margin-top: 0px;
 }
@@ -82,7 +82,7 @@ header h3 {
 
 
 .status-bar {
-    background-color:#272932;
+    background-color: $background-tint;
     margin: 0px;
 }
 
@@ -90,7 +90,7 @@ header h3 {
     margin: 0px;
     padding: 5px;
     border: none;
-    border-bottom: 2px solid #63B995;
+    border-bottom: 2px solid $accent-main;
 }
 
 .status-bar p span {

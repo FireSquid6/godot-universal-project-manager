@@ -1,7 +1,6 @@
 import { useState, useEffect } from 'react';
 import { useLocation } from 'react-router-dom';
 import { ipcRenderer } from 'electron';
-import "./header.scss";
 import HeaderTab from './HeaderTab';
 
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome'
