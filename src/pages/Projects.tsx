@@ -1,3 +1,8 @@
+import ProjectBox from "@/components/ProjectBox";
+
+
 export default function Projects() {
-  return <h1>Projects page</h1>;
+  return (
+    <ProjectBox projectPath="C://Users/jdeis/source/teleorb/" projectName="Teleorb" versionString="1.0.0-stable" iconPath=""></ProjectBox>
+  );
 }
