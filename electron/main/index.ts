@@ -106,7 +106,10 @@ async function createWindow() {
   });
 
   ipcMain.handle("get-setting", async (event, key) => {
-    console.log(store.get(key));
+    if (store.has(key)) {
+      return store.get(key);
+    }
+    return null;
   });
 }
 
@@ -116,25 +119,26 @@ ipcMain.on("crawl-tuxfamily", async (event, args) => {
   const possible_links = await crawl(true);
 
   let found_links = [];
-  possible_links.forEach(async (url, i) => {
+  await possible_links.forEach(async (url, i) => {
     win.webContents.send(
       "set-statusbar-name",
       `Parsing link ${i + 1} of ${possible_links.length}...`
     );
     let link_data: Object | null = await parseUrl(url);
 
-    if (link_data != null) {
+    if (link_data !== null) {
       found_links.push(link_data);
     }
   });
 
+  console.log(found_links);
   win.webContents.send("set-statusbar-name", "Saving links as json file...");
-  JSON.stringify({
+  const setting = {
     date: new Date().toUTCString(),
     links: found_links,
-  });
+  };
 
-  // TODO: save the json file
+  store.set("crawl-results", setting);
 
   win.webContents.send("set-statusbar-name", "");
 
