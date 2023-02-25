@@ -10,17 +10,8 @@ $accent-background: #13151b;
 $accent-hover: #92ceb5;
 
 
-@import url('https://fonts.googleapis.com/css2?family=Quicksand&display=swap');
-@font-face {
-  font-family: "Light";
-  /*Can be any text*/
-  src: local("DroidSans"),
-    url("./fonts/DroidSans.ttf") format("truetype");
-}
-
-
 body {
-  font-family: 'Quicksand', sans-serif;
+  font-family: 'Fira Sans', sans-serif;
   background-color: $background-shade;
   color: #FFF8F0;
 
