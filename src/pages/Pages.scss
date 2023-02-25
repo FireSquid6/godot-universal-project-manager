@@ -1,0 +1,21 @@
+.projects-title {
+  display: flex;
+  flex-direction: row;
+  align-items: center;
+  justify-content: space-between;
+}
+
+.projects-title button {
+  background: none;
+  border: none;
+  color: $accent-main;
+  transition: all 200ms ease-in-out;
+}
+
+.projects-title button:hover {
+  color: $accent-hover;
+  rotate: 12deg;
+  cursor: pointer;
+}
+
+
