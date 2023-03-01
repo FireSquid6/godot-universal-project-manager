@@ -1,4 +1,4 @@
-import { app, BrowserWindow, shell, ipcMain } from "electron";
+import { app, BrowserWindow, shell, ipcMain, dialog } from "electron";
 import { release } from "node:os";
 import { join } from "node:path";
 import { download } from "electron-dl";
@@ -141,6 +141,18 @@ ipcMain.on("crawl-tuxfamily", async (event, args) => {
   win.webContents.send("set-statusbar-name", "");
 
   return Promise.resolve();
+});
+
+// handle requests to have the user select a direcotry
+ipcMain.handle("select-directory", async (event, args) => {
+  const paths = await dialog.showOpenDialog(win, {
+    title: "Select the directory",
+    properties: ["openDirectory"],
+  });
+
+  console.log(paths);
+
+  return Promise.resolve(paths.filePaths[0]);
 });
 
 app.whenReady().then(createWindow);
