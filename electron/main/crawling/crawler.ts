@@ -23,14 +23,12 @@ export default async function crawl(
 
     let pageHtml: string;
 
-    console.log("\nGetting page html for " + currentUrl + " ...");
     pageHtml = await axios
       .get(currentUrl)
       .then((response) => {
         return response.data;
       })
       .catch((error) => {
-        console.log("An error occurred while trying to get the page html");
         return "error, axios failed";
       });
 
@@ -51,10 +49,8 @@ export default async function crawl(
       if (!visited.includes(link) && !toVisit.includes(link) && is_included) {
         if (link.charAt(link.length - 1) == "/") {
           toVisit.push(link);
-          console.log(`${link} added to stack (${toVisit.length})`);
         } else {
           downloads.push(link);
-          console.log(`${link} added to downloads`);
         }
       }
     });

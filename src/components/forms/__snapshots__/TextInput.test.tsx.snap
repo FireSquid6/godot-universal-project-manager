@@ -1,0 +1,18 @@
+// Jest Snapshot v1, https://goo.gl/fbAQLP
+
+exports[`renders without crashing Component is rendered without breaking changes 1`] = `
+<div
+  className="text-input"
+>
+  <label
+    htmlFor=""
+  >
+    Test Label
+  </label>
+  <input
+    defaultValue=""
+    id=""
+    type="text"
+  />
+</div>
+`;
