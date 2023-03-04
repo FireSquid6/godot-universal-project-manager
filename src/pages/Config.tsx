@@ -1,5 +1,7 @@
 import { ipcRenderer } from "electron";
 import React from "react";
+import TextInput from "@/components/forms/TextInput";
+import FileInput from "@/components/forms/FileInput";
 
 
 
@@ -22,10 +24,9 @@ export default function Config() {
   return (
     <>
       <h1>Config Page</h1>
+      <FileInput pathChanged={(path: string) => console.log(path)}></FileInput>
       <form onSubmit={handleSubmit}>
-        <input type="directory" name="projectsPath" defaultValue="C://gupm/GodotProjects/"></input>
-        <input type="text" name="versionsPath" defaultValue="C://gupm/GodotVersions/"></input>
-        <button type="submit">Update Settings</button>
+        <TextInput onChange={(value) => console.log(value)} versionInput={true} label="Versions Folder" inputId="versions"/>
       </form>
 
       <button onClick={onClick}>Print settings to the console!</button>

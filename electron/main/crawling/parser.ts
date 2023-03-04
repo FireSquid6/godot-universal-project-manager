@@ -31,7 +31,6 @@ export default function parseUrl(url: string): Object | null {
     !url.includes("godotengine") ||
     !url.includes("zip")
   ) {
-    console.log(`${url} is not a download link`);
     return null;
   }
 
@@ -89,9 +88,6 @@ export default function parseUrl(url: string): Object | null {
   }
 
   // the link is just the url
-  console.log(
-    `${url} is a download link for Godot ${data.version}-${data.release} on ${data.os}`
-  );
   data.link = url;
   return data;
 }

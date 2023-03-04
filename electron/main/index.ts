@@ -1,4 +1,11 @@
-import { app, BrowserWindow, shell, ipcMain } from "electron";
+import {
+  app,
+  BrowserWindow,
+  shell,
+  ipcMain,
+  dialog,
+  FileFilter,
+} from "electron";
 import { release } from "node:os";
 import { join } from "node:path";
 import { download } from "electron-dl";
@@ -141,6 +148,19 @@ ipcMain.on("crawl-tuxfamily", async (event, args) => {
   win.webContents.send("set-statusbar-name", "");
 
   return Promise.resolve();
+});
+
+interface OpenExplorerArgs {
+  path: string;
+  message: string;
+  doing: "openDirectory" | "openFile";
+  filters: FileFilter[];
+}
+ipcMain.handle("open-explorer", async (event, options) => {
+  console.log(options);
+
+  const result = await dialog.showOpenDialog(win, options);
+  return result.filePaths[0];
 });
 
 app.whenReady().then(createWindow);
