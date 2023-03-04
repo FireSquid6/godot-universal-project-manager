@@ -1,6 +1,6 @@
 {
   "name": "gupm",
-  "version": "2.1.0",
+  "version": "1.0.0",
   "main": "dist-electron/main/index.js",
   "description": "An electron application to easily manage and download godot versions and projects",
   "author": "Jonathan Deiss",

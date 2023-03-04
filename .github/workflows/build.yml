@@ -1,0 +1,33 @@
+name: Build/release
+
+on: push
+
+jobs:
+  release: 
+    runs-on: ${{ matrix.os }}
+
+    strategy:
+      matrix:
+        os: [macos-latest, ubuntu-latest, windows-latest]
+    
+    steps:
+      - name: Check out Git repository
+        uses: actions/checkout@v1 
+      
+      - name: Setup node 
+        uses: actions/setup-node@v1 
+        with:
+          node-version: 19
+      
+      - name: Install dependencies
+        run: npm install
+      
+      - name: Build project
+        run: npm run build
+      
+      - name: Upload artifact
+        uses: actions/upload-artifact@v2
+        with: 
+          name: release
+          path: release/1.0.0
+      
