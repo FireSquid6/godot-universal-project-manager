@@ -26,7 +26,7 @@ export default function Config() {
       <h1>Config Page</h1>
       <FileInput pathChanged={(path: string) => console.log(path)}></FileInput>
       <form onSubmit={handleSubmit}>
-        <TextInput label="Versions Folder" inputId="versions"/>
+        <TextInput onChange={(value) => console.log(value)} versionInput={true} label="Versions Folder" inputId="versions"/>
       </form>
 
       <button onClick={onClick}>Print settings to the console!</button>

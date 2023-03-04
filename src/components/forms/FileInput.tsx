@@ -7,10 +7,11 @@ import { ipcRenderer } from "electron";
 interface FileInputProps {
   pathChanged: (path: string) => void,
   initialPath?: string
+  label?: string
   openMode?: "openFile" | "openDirectory"
 }
 
-export default function FileInput({ pathChanged, openMode="openFile", initialPath = ""}: FileInputProps) {
+export default function FileInput({ label="", pathChanged, openMode="openFile", initialPath = ""}: FileInputProps) {
   const [filepath, setFilePath] = useState(initialPath);
   const explore = () => {
     // open the user's file explorer and have them select a directory
@@ -27,11 +28,14 @@ export default function FileInput({ pathChanged, openMode="openFile", initialPat
   }
 
   return (
-    <div className="file-input">
-      <button type="button" onClick={explore}>
-        <FontAwesomeIcon icon={faFolder} />
-      </button>
-      <p>{filepath}</p>
+    <div>
+      <p>{label}</p>
+      <div className="file-input">
+        <button type="button" onClick={explore}>
+          <FontAwesomeIcon icon={faFolder} />
+        </button>
+        <p>{filepath}</p>
+      </div>
     </div>
   )
 }
