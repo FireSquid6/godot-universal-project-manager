@@ -1,6 +1,7 @@
 import { ipcRenderer } from "electron";
 import React from "react";
 import TextInput from "@/components/forms/TextInput";
+import FileInput from "@/components/forms/FileInput";
 
 
 
@@ -23,6 +24,7 @@ export default function Config() {
   return (
     <>
       <h1>Config Page</h1>
+      <FileInput pathChanged={(path: string) => console.log(path)}></FileInput>
       <form onSubmit={handleSubmit}>
         <TextInput label="Versions Folder" inputId="versions"/>
       </form>
