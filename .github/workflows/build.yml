@@ -25,7 +25,7 @@ jobs:
       - name: Build project
         run: npm run build
         env: 
-          GH-TOKEN: ${{ secrets.GITHUB_TOKEN }}
+          GH_TOKEN: ${{ secrets.GITHUB_TOKEN }}
       
       - name: Upload artifact
         uses: actions/upload-artifact@v2
