@@ -25,7 +25,7 @@ jobs:
         id: patch_notes
         uses: juliangruber/read-file-action@v1
         with:
-          path: ./patch-notes.md
+          path: ./meta/patch-notes.md
 
       - name: create/update tag
         uses: rickstaa/action-create-tag@v1.3.9
