@@ -1,8 +1,43 @@
 name: Build/release
 
-on: push
+on:
+  push:
+    branches:
+      - "release"
+      - "20-add-continuous-integration-and-automatic-testing-to-github-actions"
 
 jobs:
+  create-tag:
+    runs-on: ${{ ubuntu-latest }}
+
+    steps:
+      - name: get version
+        id: tag_version
+        uses: juliangruber/read-file-action@v1
+        with:
+          path: ./version.txt
+      
+      - name: get patch notes 
+        id: patch_notes
+        uses: juliangruber/read-file-action@v1
+        with:
+          path: ./patch-notes.md
+
+      - name: create/update tag
+        uses: rickstaa/action-create-tag@v1.3.9
+        with:
+          tag: ${{ steps.tag_version.outputs.content }}
+          github_token: ${{ secrets.GITHUB_TOKEN }}
+
+      - name: create release
+        uses: softprops/action-gh-release@v0.1.14
+        with:
+          token: ${{ secrets.GITHUB_TOKEN }}
+          generate_release_notes: true
+          tag_name: ${{ steps.tag_version.outputs.content }}
+          append_body: ${{ steps.patch_notes.outputs.content }}
+
+
   release:
     runs-on: ${{ matrix.os }}
 
@@ -13,6 +48,12 @@ jobs:
     steps:
       - name: Check out Git repository
         uses: actions/checkout@v1
+
+      - name: Get current version
+        id: tag_version
+        uses: juliangruber/read-file-action@v1
+        with:
+          path: ./version.txt
 
       - name: Install Node.js, NPM and Yarn
         uses: actions/setup-node@v1
