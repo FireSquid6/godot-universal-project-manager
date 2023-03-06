@@ -3,19 +3,20 @@ name: Build/release
 on:
   push:
     branches:
-      - "release"
       - "20-add-continuous-integration-and-automatic-testing-to-github-actions"
+      - "release"
+      
 
 jobs:
   create-tag:
-    runs-on: ${{ ubuntu-latest }}
+    runs-on: ubuntu-latest
 
     steps:
       - name: get version
         id: tag_version
         uses: juliangruber/read-file-action@v1
         with:
-          path: ./version.txt
+          path: ./meta/version.txt
       
       - name: get patch notes 
         id: patch_notes
@@ -53,7 +54,7 @@ jobs:
         id: tag_version
         uses: juliangruber/read-file-action@v1
         with:
-          path: ./version.txt
+          path: ./meta/version.txt
 
       - name: Install Node.js, NPM and Yarn
         uses: actions/setup-node@v1
