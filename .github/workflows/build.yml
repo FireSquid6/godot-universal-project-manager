@@ -1,48 +1,10 @@
-name: Build/release
-
 on:
   push:
-    branches:
-      - "20-add-continuous-integration-and-automatic-testing-to-github-actions"
-      - "release"
-      
+    tags: ["*"]
 
 jobs:
-  create-tag:
-    runs-on: ubuntu-latest
-
-    steps:
-      - name: Check out Git repository
-        uses: actions/checkout@v1
-
-      - name: get version
-        id: tag_version
-        uses: juliangruber/read-file-action@v1
-        with:
-          path: ./meta/version.txt
-      
-      - name: get patch notes 
-        id: patch_notes
-        uses: juliangruber/read-file-action@v1
-        with:
-          path: ./meta/patch-notes.md
-
-      - name: create/update tag
-        uses: rickstaa/action-create-tag@v1.3.9
-        with:
-          tag: ${{ steps.tag_version.outputs.content }}
-          github_token: ${{ secrets.GITHUB_TOKEN }}
-
-      - name: create release
-        uses: softprops/action-gh-release@v0.1.14
-        with:
-          token: ${{ secrets.GITHUB_TOKEN }}
-          generate_release_notes: true
-          tag_name: ${{ steps.tag_version.outputs.content }}
-          append_body: ${{ steps.patch_notes.outputs.content }}
-
-
   release:
+    if: startsWith(github.ref, 'refs/tags/v')
     runs-on: ${{ matrix.os }}
 
     strategy:
@@ -50,16 +12,28 @@ jobs:
         os: [ubuntu-latest, windows-latest]
 
     steps:
-      - name: Check out Git repository
-        uses: actions/checkout@v1
+      - name: Checkout
+        uses: actions/checkout@v2
 
       - name: Install Node.js, NPM and Yarn
-        uses: actions/setup-node@v1
+        uses: actions/setup-node@v2
         with:
           node-version: 18
 
-      - name: Build/release Electron app
-        uses: samuelmeuli/action-electron-builder@v1
+      - name: apt-update
+        if: startsWith(matrix.os, 'ubuntu-latest')
+        run: sudo apt-get update
+
+      - name: autoremove
+        if: startsWith(matrix.os, 'ubuntu-latest')
+        run: sudo apt autoremove
+
+      - name: Install libarchive rpm on Linux
+        if: startsWith(matrix.os, 'ubuntu-latest')
+        run: sudo apt-get install libarchive-tools rpm
+
+      - name: Release Electron app
+        uses: coparse-inc/action-electron-builder@v1.0.0
         with:
           # GitHub token, automatically provided to the action
           # (No need to define this secret in the repo settings)
