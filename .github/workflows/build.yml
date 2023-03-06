@@ -53,12 +53,6 @@ jobs:
       - name: Check out Git repository
         uses: actions/checkout@v1
 
-      - name: Get current version
-        id: tag_version
-        uses: juliangruber/read-file-action@v1
-        with:
-          path: ./meta/version.txt
-
       - name: Install Node.js, NPM and Yarn
         uses: actions/setup-node@v1
         with:
