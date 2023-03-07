@@ -28,3 +28,5 @@ jobs:
 
       - name: Run build script
         run: node ./ci/ci.js ${{ secrets.GITHUB_TOKEN }}
+        env:
+          GH_TOKEN: ${{ secrets.GITHUB_TOKEN }}
