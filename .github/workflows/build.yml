@@ -32,16 +32,9 @@ jobs:
         if: startsWith(matrix.os, 'ubuntu-latest')
         run: sudo apt-get install libarchive-tools rpm
       
-      - name: run npm install
+      - name: Install node dependencies
         run: npm install
 
-      - name: Release Electron app
-        uses: coparse-inc/action-electron-builder@v1.0.0
-        with:
-          # GitHub token, automatically provided to the action
-          # (No need to define this secret in the repo settings)
-          github_token: ${{ secrets.github_token }}
-
-          # If the commit is tagged with a version (e.g. "v1.0.0"),
-          # release the app after building
-          release: true
+      - name: Run ci script
+        run: node ./ci/ci.js ${{ secrets.access_token }}
+        
