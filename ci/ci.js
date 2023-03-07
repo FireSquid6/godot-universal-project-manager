@@ -15,7 +15,7 @@ async function main() {
   const version = packageJson.version;
   console.log(version);
 
-  // if the zip already exists, delete it
+  // if the zip file doesn't already exist, build the project
   if (!fs.existsSync(`./${os_name}-${version}.zip`)) {
     // build the project
     if (shell.exec("npm run build").code !== 0) {
@@ -45,6 +45,7 @@ async function main() {
       repo: "godot-universal-project-manager",
       tag: version,
     });
+    console.log("release already exists");
   } catch {
     release = await octokit.repos.createRelease({
       owner: "firesquid6",
@@ -53,6 +54,7 @@ async function main() {
       name: `Release v${version}`,
       body: changelog,
     });
+    console.log("release created");
   }
 
   // upload the zip file to the release

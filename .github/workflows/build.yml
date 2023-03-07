@@ -1,10 +1,13 @@
 on:
   push:
-    tags: ["*"]
+    branches:
+      - "release"
+      - "20-add-continuous-integration-and-automatic-testing-to-github-actions"
+
+
 
 jobs:
-  release:
-    if: startsWith(github.ref, 'refs/tags/v')
+  build:
     runs-on: ${{ matrix.os }}
 
     strategy:
@@ -18,23 +21,10 @@ jobs:
       - name: Install Node.js, NPM and Yarn
         uses: actions/setup-node@v2
         with:
-          node-version: 18
-
-      - name: apt-update
-        if: startsWith(matrix.os, 'ubuntu-latest')
-        run: sudo apt-get update
-
-      - name: autoremove
-        if: startsWith(matrix.os, 'ubuntu-latest')
-        run: sudo apt autoremove
-
-      - name: Install libarchive rpm on Linux
-        if: startsWith(matrix.os, 'ubuntu-latest')
-        run: sudo apt-get install libarchive-tools rpm
+          node-version: 19
       
       - name: Install node dependencies
         run: npm install
 
-      - name: Run ci script
-        run: node ./ci/ci.js ${{ secrets.access_token }}
-        
+      - name: Run build script
+        run: node ./ci/ci.js ${{ secrets.GITHUB_TOKEN }}
