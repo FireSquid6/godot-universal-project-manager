@@ -101,20 +101,13 @@ async function createWindow() {
   });
 
   // handle storing and getting settings
-  let data: {
-    key: string;
-    value: any;
-  };
-
-  ipcMain.handle("store-setting", async (event, data) => {
-    store.set(data.key, data.value);
+  ipcMain.handle("store-setting", async (event, args) => {
+    console.log(args);
+    return store.set(args.key, args.value);
   });
 
   ipcMain.handle("get-setting", async (event, key) => {
-    if (store.has(key)) {
-      return store.get(key);
-    }
-    return null;
+    return store.get(key);
   });
 }
 

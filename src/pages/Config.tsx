@@ -3,33 +3,59 @@ import React from "react";
 import TextInput from "@/components/forms/TextInput";
 import FileInput from "@/components/forms/FileInput";
 
+import { useRef, useEffect, useState } from 'react'
+
+function useIsFirstRender(): boolean {
+  const isFirst = useRef(true)
+
+  if (isFirst.current) {
+    isFirst.current = false
+
+    return true
+  }
+
+  return isFirst.current
+}
 
 
 export default function Config() {
-  const handleSubmit = async (data: any) => {
-    data.preventDefault();
+  const [versionsPath, setVersionsPath] = React.useState<string>("");
+  const isFirst = useIsFirstRender()
+  const onSubmit = () => {
+    console.log(`setting ${versionsPath} as versions path`)
+    ipcRenderer.invoke("store-setting", {
+      key: "versions-path",
+      value: versionsPath,
+    });
+  }
 
-
-    const formData = Object.fromEntries(new FormData(data.target).entries());
-    for (const key in formData) {
-      // save all keys to settings using ipcRenderer
-      ipcRenderer.invoke('store-setting', {key: key, value: formData[key]});
+  useEffect(() => {
+    if (!isFirst) {
+      return
     }
-  }
+    ipcRenderer.invoke('get-setting', 'versions-path').then((data) => {
+      console.log(`First render: ${data}`)
+      setVersionsPath(data)
+    });
+  });
 
-  const onClick = () => {
-    console.log(ipcRenderer.invoke('get-setting', 'projectsPath'));
-  }
 
   return (
     <>
-      <h1>Config Page</h1>
-      <FileInput pathChanged={(path: string) => console.log(path)}></FileInput>
-      <form onSubmit={handleSubmit}>
-        <TextInput onChange={(value) => console.log(value)} versionInput={true} label="Versions Folder" inputId="versions"/>
-      </form>
-
-      <button onClick={onClick}>Print settings to the console!</button>
+      <h1>Settings</h1>
+      <div>
+        <FileInput openMode="openDirectory" path={versionsPath} label={`Directory to store Godot executables`} pathChanged={(path: string) => {
+          setVersionsPath(path)
+          console.log(path)
+      }}/>
+      </div>
+      <div style={{
+        display: "flex",
+        justifyContent: "center",
+        margin: "10px",
+      }}>
+        <button className="submit" onClick={onSubmit}>Update Settings</button>
+      </div>
     </>
   );
 }

@@ -6,35 +6,33 @@ import { ipcRenderer } from "electron";
 
 interface FileInputProps {
   pathChanged: (path: string) => void,
-  initialPath?: string
+  path: string
   label?: string
   openMode?: "openFile" | "openDirectory"
 }
 
-export default function FileInput({ label="", pathChanged, openMode="openFile", initialPath = ""}: FileInputProps) {
-  const [filepath, setFilePath] = useState(initialPath);
+export default function FileInput({ label="", pathChanged, openMode="openFile", path = ""}: FileInputProps) {
   const explore = () => {
     // open the user's file explorer and have them select a directory
     ipcRenderer.invoke("open-explorer", {
       title: "Select a directory",
-      defaultPath: filepath,
+      defaultPath: path,
       properties: [openMode],
     }).then((path: string) => {
       if (path !== undefined) {
-        setFilePath(path);
         pathChanged(path);
       }
     });
   }
 
   return (
-    <div>
+    <div className="file-input">
       <p>{label}</p>
-      <div className="file-input">
+      <div className="inner-file-input">
         <button type="button" onClick={explore}>
           <FontAwesomeIcon icon={faFolder} />
         </button>
-        <p>{filepath}</p>
+        <p>{path}</p>
       </div>
     </div>
   )

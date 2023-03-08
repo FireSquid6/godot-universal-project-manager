@@ -34,9 +34,6 @@
   color: $text-light;
   font-size: 1.2rem;
   padding: 10px;
-
-  display: flex;
-  flex-direction: row;
 }
 
 .file-input p {
@@ -60,5 +57,42 @@
   background-color: $accent-background;
   border: 1px solid $accent-hover;
   color: $accent-hover;
+  cursor: pointer;
+}
+
+.inner-file-input {
+  display: flex;
+  flex-direction: row;
+  padding: 5px;
+
+  align-items: center;
+  background-color: $background-main;
+  border-radius: 5px;
+}
+
+.submit {
+  background-color: $accent-main;
+  border: 1px solid $accent-main;
+  color: $accent-background;
+  border-radius: 5px;
+  font-size: 1.2rem;
+  padding: 10px;
+  margin: 0;
+  margin-left: 5px;
+
+  transition: all 0.2s ease-in-out;
+}
+
+.submit:hover {
+  background-color: $accent-hover;
+  border: 1px solid $accent-hover;
+  color: $accent-background;
+  cursor: pointer;
+}
+
+.submit:active {
+  background-color: $accent-main;
+  border: 1px solid $accent-main;
+  color: $accent-background;
   cursor: pointer;
 }
