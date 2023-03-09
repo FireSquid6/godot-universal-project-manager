@@ -1,4 +1,4 @@
-import parseUrl from "./parser";
+import { parseUrl } from "./parser";
 import { describe, expect, test } from "@jest/globals";
 
 describe("test that the parser works properly", () => {

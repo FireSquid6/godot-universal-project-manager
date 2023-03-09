@@ -8,8 +8,13 @@ export default function Versions() {
   };
 
   const handleDebug = () => {
-    ipcRenderer.invoke('get-setting', 'crawl-results').then((data) => {
-      console.log(data)
+    ipcRenderer.invoke('download-godot', {
+      version: '4.0',
+      os: 'win64',
+      release: 'stable',
+      mono: false,
+    }).then((result) => {
+      console.log(result)
     });
   }
 
