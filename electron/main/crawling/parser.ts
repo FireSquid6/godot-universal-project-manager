@@ -1,18 +1,20 @@
 import { List } from "react-bootstrap-icons";
 
-export default function parseUrl(url: string): Object | null {
+export interface UrlData {
+  mono: boolean;
+  os: string;
+  version: string;
+  release: string;
+  link: string;
+}
+
+export function parseUrl(url: string): Object | null {
   // parses a tuxfamily url and returns either null or an object containing the version, platform, and release of the godot version
   // example: https://downloads.tuxfamily.org/godotengine/2.0.3/Godot_v2.0.3_stable_osx64.zip
   // returns: { version: "2.0.3", os: "osx64", release: "stable" }
 
   // define interfaces
-  interface UrlData {
-    mono: boolean;
-    os: string;
-    version: string;
-    release: string;
-    link: string;
-  }
+
   const data: UrlData = {
     mono: false,
     os: "",

@@ -10,9 +10,12 @@ import { release } from "node:os";
 import { join } from "node:path";
 import { download } from "electron-dl";
 
-import * as fs from "fs";
+import * as fs from "fs-extra";
 import crawl from "./crawling/crawler";
-import parseUrl from "./crawling/parser";
+import { parseUrl, UrlData } from "./crawling/parser";
+import electronDl from "electron-dl";
+
+import extract from "extract-zip";
 
 const Store = require("electron-store");
 
@@ -92,22 +95,14 @@ async function createWindow() {
     return { action: "deny" };
   });
 
-  // setup ipc
-  ipcMain.on("download", (event, info) => {
-    console.log(app.getPath("appData"));
-    download(BrowserWindow.getFocusedWindow(), info.url, info.properties).then(
-      (dl) => event.reply("download complete", dl.getSavePath())
-    );
-  });
-
   // handle storing and getting settings
   ipcMain.handle("store-setting", async (event, args) => {
     console.log(args);
-    return store.set(args.key, args.value);
+    return Promise.resolve(store.set(args.key, args.value));
   });
 
   ipcMain.handle("get-setting", async (event, key) => {
-    return store.get(key);
+    return Promise.resolve(store.get(key));
   });
 }
 
@@ -141,6 +136,51 @@ ipcMain.on("crawl-tuxfamily", async (event, args) => {
   win.webContents.send("set-statusbar-name", "");
 
   return Promise.resolve();
+});
+
+interface DownloadGodotArgs {
+  version: string;
+  os: string;
+  release: string;
+  mono: boolean;
+}
+ipcMain.handle("download-godot", async (event, args: DownloadGodotArgs) => {
+  // first, get the download link from the 'crawl-results' setting
+  const crawl_results = store.get("crawl-results");
+  let link = "";
+
+  for (let i = 0; i < crawl_results.links.length; i++) {
+    const result = crawl_results.links[i];
+    if (
+      result.version === args.version &&
+      result.os === args.os &&
+      result.release === args.release &&
+      result.mono === args.mono
+    ) {
+      link = result.link;
+      break;
+    }
+  }
+
+  // return null if no link was found
+  if (link === "") {
+    console.log("no link was found");
+    return Promise.resolve(null);
+  }
+
+  // get the directory to download the file to from the versions-folder setting
+  const versions_folder = store.get("versions-path");
+
+  // download the zip file to the temp directory inside of the versions folder using electron-dl
+  const dl = await download(BrowserWindow.getFocusedWindow(), link, {
+    directory: join(versions_folder, "temp"),
+  });
+
+  // extract the zip file to the versions folder
+  await extract(dl.getSavePath(), { dir: versions_folder });
+
+  // delete everything in the temp directory
+  await fs.emptyDir(join(versions_folder, "temp"));
 });
 
 interface OpenExplorerArgs {
