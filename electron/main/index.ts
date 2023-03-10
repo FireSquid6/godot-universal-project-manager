@@ -79,15 +79,9 @@ async function createWindow() {
     // electron-vite-vue#298
     win.loadURL(url);
     // Open devTool if the app is not packaged
-    win.webContents.openDevTools();
   } else {
     win.loadFile(indexHtml);
   }
-
-  // Test actively push message to the Electron-Renderer
-  win.webContents.on("did-finish-load", () => {
-    win?.webContents.send("main-process-message", new Date().toLocaleString());
-  });
 
   // Make all links open with the browser, not with the application
   win.webContents.setWindowOpenHandler(({ url }) => {
@@ -95,16 +89,18 @@ async function createWindow() {
     return { action: "deny" };
   });
 
-  // handle storing and getting settings
-  ipcMain.handle("store-setting", async (event, args) => {
-    console.log(args);
-    return Promise.resolve(store.set(args.key, args.value));
-  });
-
-  ipcMain.handle("get-setting", async (event, key) => {
-    return Promise.resolve(store.get(key));
-  });
+  win.webContents.openDevTools();
 }
+
+// handle storing and getting settings
+ipcMain.handle("store-setting", async (event, args) => {
+  console.log(args);
+  return Promise.resolve(store.set(args.key, args.value));
+});
+
+ipcMain.handle("get-setting", async (event, key) => {
+  return Promise.resolve(store.get(key));
+});
 
 // handle requests to crawl the tuxfamily website
 ipcMain.on("crawl-tuxfamily", async (event, args) => {

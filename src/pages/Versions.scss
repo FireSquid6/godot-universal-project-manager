@@ -1,0 +1,109 @@
+.filter {
+  display: flex;
+  flex-direction: row;
+  justify-content: space-between;
+  padding: 10px;
+  background-color: $background-main;
+}
+
+.filter div {
+  display: flex;
+  flex-direction: row;
+  align-items: center;
+}
+
+.filter input, select  {
+  background-color: $background-main;
+  border: none;
+  color: $text-light;
+  padding: 4px;
+  
+  border-radius: 5px;
+}
+
+
+.filter input:focus, select:focus {
+  outline: none;
+}
+
+.filter  {
+  background-color: $background-tint;
+  border: none;
+  color: $text-light;
+  padding: 4px;
+  margin-left: 3px;
+  border-radius: 5px;
+}
+
+
+input[type="checkbox"] {
+  /* Add if not using autoprefixer */
+  -webkit-appearance: none;
+  /* Remove most all native input styles */
+  appearance: none;
+  /* For iOS < 15 */
+  background-color: $accent-main;
+  /* Not removed via appearance */
+  margin: 2px;
+
+  font: inherit;
+  color: $accent-main;
+  width: 1.15em;
+  height: 1.15em;
+  border: 0.15em solid $accent-main;
+  border-radius: 0.15em;
+  transform: translateY(-0.075em);
+
+  display: grid;
+  place-content: center;
+}
+
+input[type="checkbox"]::before {
+  content: "";
+  width: 0.65em;
+  height: 0.65em;
+  clip-path: polygon(14% 44%, 0 65%, 50% 100%, 100% 16%, 80% 0%, 43% 62%);
+  transform: scale(0);
+  transform-origin: bottom left;
+  transition: 120ms transform ease-in-out;
+  box-shadow: inset 1em 1em var(--form-control-color);
+  /* Windows High Contrast Mode */
+  background-color: CanvasText;
+}
+
+input[type="checkbox"]:checked::before {
+  transform: scale(1);
+}
+
+input[type="checkbox"]:disabled {
+  --form-control-color: var(--form-control-disabled);
+
+  color: var(--form-control-disabled);
+  cursor: not-allowed;
+}
+
+
+.versions-split {
+  border-right: 3px solid $accent-main;
+  border-left: 3px solid $accent-main;
+  border-top: 3px solid $accent-main;
+  height: 100%;
+  width: 100%;
+
+  padding: 10px;
+}
+
+#installed-versions {
+  border-right: 2px solid $accent-main;
+}
+
+#available-versions {
+  border-left: 2px solid $accent-main;
+}
+
+.versions {
+  display: flex;
+  flex-direction: row;
+  
+  height: 100%;
+}

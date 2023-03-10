@@ -1,0 +1,31 @@
+.version-box {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  flex-direction: row;
+  margin: 0px;
+  padding: 5px;
+}
+
+.version-box div {
+  display: flex;
+  flex-direction: row;
+  align-items: center;
+}
+
+.version-box div button {
+  background-color: $background-tint;
+  border: none;
+  color: $text-light;
+  padding: 8px;
+  margin-left: 3px;
+  border-radius: 5px;
+
+  transition: all 0.2s ease-in-out;
+}
+
+.version-box div button:hover {
+  background-color: $accent-main;
+  color: $text-dark;
+  cursor: pointer;
+}
