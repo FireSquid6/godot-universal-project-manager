@@ -169,7 +169,7 @@ ipcMain.handle("download-godot", async (event, args: DownloadGodotArgs) => {
   }
 
   // get the directory to download the file to from the versions-folder setting
-  const versions_folder = store.get("versions-path");
+  const versions_folder = store.get("versions_path");
 
   // download the zip file to the temp directory inside of the versions folder using electron-dl
   const dl = await download(BrowserWindow.getFocusedWindow(), link, {

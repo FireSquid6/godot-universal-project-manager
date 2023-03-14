@@ -24,7 +24,7 @@ export default function Config() {
   const onSubmit = () => {
     console.log(`setting ${versionsPath} as versions path`)
     ipcRenderer.invoke("store-setting", {
-      key: "versions-path",
+      key: "versions_path",
       value: versionsPath,
     });
   }
@@ -33,7 +33,7 @@ export default function Config() {
     if (!isFirst) {
       return
     }
-    ipcRenderer.invoke('get-setting', 'versions-path').then((data) => {
+    ipcRenderer.invoke('get-setting', 'versions_path').then((data) => {
       console.log(`First render: ${data}`)
       setVersionsPath(data)
     });
