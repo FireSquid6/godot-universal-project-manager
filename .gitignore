@@ -31,3 +31,9 @@ yarn.lock
 
 
 *.zip
+*.tar.gz
+*.rar
+*.exe
+*.dmg
+
+converage
